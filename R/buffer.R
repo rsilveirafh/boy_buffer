@@ -1,6 +1,4 @@
-#funcao:
-
-buffer.f <- function(foo, buffer, reps) {
+buffer_f <- function(foo, buffer, reps) {
 	suitable <- list()
 	for (k in 1:reps) {
 		outvec <- as.numeric(c())
@@ -27,8 +25,4 @@ buffer.f <- function(foo, buffer, reps) {
 	foo[best, ]
 }
 
-## Definir o arquivo que contem os pontos
-## Criar objeto apenas com long lat (nessa ordem)
-## Retirar pontos que estao a um raio de 500m uns dos outros 
-# buffer.f(data, distancia, iteracoes)
-# buffer.f(species, 0.5, 1000)
+
