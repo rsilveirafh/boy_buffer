@@ -150,7 +150,5 @@ ggplot2::ggplot() +
 
 
 
-
-
 # Saving data
 write_csv(all_data, "output/filtered_gbif.csv")
