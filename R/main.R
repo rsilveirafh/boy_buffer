@@ -76,7 +76,7 @@ filtered_gbif_clusters <- filter_gbif(dataList = hull_buff_list,
 
 
 
-# 1.5) Buffering points inside Convexes -----------------------------------
+1.5) Buffering points inside Convexes -----------------------------------
 
 
 # Preparing objects
