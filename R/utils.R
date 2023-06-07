@@ -42,8 +42,8 @@ plot_hull <- function(dataHull, dataBuff, nCluster) {
 	require(ggplot2)
 	
 	ggplot2::ggplot() +
-		ggplot2::geom_sf(data = hull_list[[nCluster]], fill = NA) +
-		ggplot2::geom_sf(data = hull_buff[[nCluster]], fill = NA) +
+		ggplot2::geom_sf(data = dataHull[[nCluster]], fill = NA) +
+		ggplot2::geom_sf(data = dataBuff[[nCluster]], fill = NA) +
 		ggplot2::theme_light() +
 		ggplot2::coord_sf()
 	

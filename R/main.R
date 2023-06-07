@@ -57,7 +57,7 @@ hull_buff_list <- hull_list |>
 # nCluster: 1 to 7
 plot_hull(dataHull = hull_list, 
 		  dataBuff = hull_buff_list, 
-		  nCluster = 4)
+		  nCluster = 7)
 
 
 # 1.3) GBIF data into sf object -------------------------------------------
@@ -93,9 +93,6 @@ dfs_pre_buffer <- prep_dfs(filtered_gbif_clusters)
 final_list <- buffer_boy(data = dfs_pre_buffer, 
 						 dist = 0.1, 
 						 reps = 1)
-
-
-
 
 
 
