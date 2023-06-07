@@ -57,7 +57,7 @@ hull_buff_list <- hull_list |>
 # nCluster: 1 to 7
 plot_hull(dataHull = hull_list, 
 		  dataBuff = hull_buff_list, 
-		  nCluster = 7)
+		  nCluster = 2)
 
 
 # 1.3) GBIF data into sf object -------------------------------------------
@@ -76,7 +76,7 @@ filtered_gbif_clusters <- filter_gbif(dataList = hull_buff_list,
 
 
 
-1.5) Buffering points inside Convexes -----------------------------------
+# 1.5) Buffering points inside Convexes -----------------------------------
 
 
 # Preparing objects
@@ -91,8 +91,8 @@ dfs_pre_buffer <- prep_dfs(filtered_gbif_clusters)
 # reps = number of iteractions
 
 final_list <- buffer_boy(data = dfs_pre_buffer, 
-						 dist = 0.1, 
-						 reps = 1)
+						 dist = 0.5, 
+						 reps = 10)
 
 
 
@@ -111,7 +111,7 @@ unique_plot <- function(nCluster) {
 		coord_sf(xlim = c(-130, -60), ylim = c(25, 50), expand = FALSE)	
 }
 
-unique_plot(nCluster = 7)
+unique_plot(nCluster = 2)
 
 
 # Ploting everything together

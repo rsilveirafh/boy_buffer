@@ -132,9 +132,9 @@ buffer_boy <- function(data, dist, reps) {
 	
 	result <- list()
 	
-	for (i in seq_along(tmp_list)) {
+	for (i in seq_along(data)) {
 		
-		df_final <- f(tmp_list[[i]], dist = dist, reps = reps)
+		df_final <- f(data[[i]], dist = dist, reps = reps)
 		
 		result[[i]] <- df_final
 		
