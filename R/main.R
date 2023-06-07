@@ -29,11 +29,11 @@ gbif <- read_csv("data/Sceloporus_GBIF.csv") |>
 
 
 ### Using pipe |> or %>% ----
-select(filter(filter(gen_data, clade >= 5), latitude < 37), samples)
+select(filter(filter(gen_data, clade >= 5), lat < 37), samples)
 	
 gen_data |> 
 	filter(clade >=5) |> 
-	filter(latitude < 37) %>%
+	filter(lat < 37) %>%
 	select(samples)
 ###
 
@@ -46,6 +46,13 @@ gen_data |>
 hull_list <- hull_by_clade(data = gen_data, long = long, lat = lat)
 
 
+# a <- gen_data |> 
+# 	dplyr::filter(clade == 1) |> 
+# 	sf::st_as_sf(coords = c(deparse(substitute(long)), 
+# 							deparse(substitute(lat)))) |> 
+# 	sf::st_set_crs(4326) |> 
+# 	st_union() %>%
+# 	st_concave_hull(ratio = 1) 
 
 # 1.2) Buffering Hulls ----------------------------------------------------
 
@@ -53,11 +60,14 @@ hull_list <- hull_by_clade(data = gen_data, long = long, lat = lat)
 hull_buff_list <- hull_list |> 
 	map(st_buffer, dist = 5000)
 
+
+
 # i.e.: Function to plot the differences between Hull and Buffered Hull
 # nCluster: 1 to 7
 plot_hull(dataHull = hull_list, 
 		  dataBuff = hull_buff_list, 
-		  nCluster = 2)
+		  nCluster = 4)
+
 
 
 # 1.3) GBIF data into sf object -------------------------------------------
@@ -99,6 +109,9 @@ final_list <- buffer_boy(data = dfs_pre_buffer,
 # 2) Map ------------------------------------------------------------------
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
+us <- ne_states(country = "united states of america", returnclass = "sf")
+
+
 
 # Function to plot separately
 unique_plot <- function(nCluster) {
@@ -119,9 +132,13 @@ all_data <- bind_rows(final_list, .id = "cluster")
 
 ggplot2::ggplot() +
 	ggplot2::geom_sf(data = world, fill = "#F4F4F4", lwd = .6) +
-	ggplot2::geom_point(data = all_data, ggplot2::aes(x = long, y = lat, fill = cluster),
-						size = 2, color = "white", shape = 21) +
-	scale_fill_viridis_d() +
+	ggplot2::geom_sf(data = us, fill = "NA", lwd = .2) +
+	ggplot2::geom_point(data = all_data, ggplot2::aes(x = long, y = lat, 
+													  fill = cluster),
+						size = 3, color = "white", shape = 21) +
+	scale_fill_viridis_d(name = "Cluster") +
+	ggplot2::geom_point(data = gen_data, ggplot2::aes(x = long, y = lat), 
+						size = 1, alpha = 0.5) +
 	ggspatial::annotation_scale(location = "br",
 								text_cex = 1,
 								bar_cols = c("black", "white")) +

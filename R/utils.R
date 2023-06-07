@@ -21,8 +21,8 @@ hull_by_clade <- function(data, long, lat) {
 				sf::st_as_sf(coords = c(deparse(substitute(long)), 
 										deparse(substitute(lat)))) |> 
 				sf::st_set_crs(4326) |> 
-				st_union() |> 
-				st_convex_hull() 
+				sf::st_union() |> 
+				sf::st_concave_hull() 
 			
 			clade_hull_list[[i]] <- clade_sf
 			
